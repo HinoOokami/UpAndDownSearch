@@ -2,15 +2,25 @@
 
 namespace UpAndDownSearch;
 
-public class UpAndDownSearchEngine
+/// <summary>
+/// Naive realization of tree search up and down
+/// </summary>
+public static class UpAndDownSearchEngine
 {
-    private List<IParent> ChildrenList { get; } = new();
-    private Queue<IParent> ChildrenQueue { get; } = new();
-    private Stack<IParent> ChildrenStack { get; } = new();
-    private List<IChild> ParentsList { get; } = new();
-    private Queue<IChild> ParentsQueue { get; } = new();
-    private Stack<IChild> ParentsStack { get; } = new();
-    public List<IChild> FindParentWide(IChild child)
+    private static List<IParent> ChildrenList { get; } = new();
+    private static Queue<IParent> ChildrenQueue { get; } = new();
+    private static Stack<IParent> ChildrenStack { get; } = new();
+    private static List<IChild> ParentsList { get; } = new();
+    private static Queue<IChild> ParentsQueue { get; } = new();
+    private static Stack<IChild> ParentsStack { get; } = new();
+
+    /// <summary>
+    /// Gets IChild and in cycle calls its GetParents method and then theirs parents and so on...
+    /// Internally uses Queue for wide search
+    /// </summary>
+    /// <param name="child">IChild</param>
+    /// <returns>List&lt;IChild&gt;</returns>
+    public static List<IChild> FindParentWide(IChild child)
     {
         ParentsList.Clear();
         ParentsQueue.Clear();
@@ -26,7 +36,14 @@ public class UpAndDownSearchEngine
 
         return ParentsList;
     }
-    public List<IChild> FindParentDeep(IChild child)
+
+    /// <summary>
+    /// Gets IChild and in cycle calls its GetParents method and then theirs parents and so on...
+    /// Internally uses Stack for deep search
+    /// </summary>
+    /// <param name="child">IChild</param>
+    /// <returns>List&lt;IChild&gt;</returns>
+    public static List<IChild> FindParentDeep(IChild child)
     {
         ParentsList.Clear();
         ParentsStack.Clear();
@@ -42,7 +59,14 @@ public class UpAndDownSearchEngine
 
         return ParentsList;
     }
-    public List<IParent> FindChildWide(IParent parent)
+
+    /// <summary>
+    /// Gets IParent and in cycle calls its GetChildren method and then theirs children and so on...
+    /// Internally uses Queue for wide search
+    /// </summary>
+    /// <param name="parent">IChild</param>
+    /// <returns>List&lt;IParent&gt;</returns>
+    public static List<IParent> FindChildWide(IParent parent)
     {
         ChildrenList.Clear();
         ChildrenQueue.Clear();
@@ -58,7 +82,14 @@ public class UpAndDownSearchEngine
 
         return ChildrenList;
     }
-    public List<IParent> FindChildDeep(IParent parent)
+
+    /// <summary>
+    /// Gets IParent and in cycle calls its GetChildren method and then theirs children and so on...
+    /// Internally uses Stack for deep search
+    /// </summary>
+    /// <param name="parent">IChild</param>
+    /// <returns>List&lt;IParent&gt;</returns>
+    public static List<IParent> FindChildDeep(IParent parent)
     {
         ChildrenList.Clear();
         ChildrenStack.Clear();
